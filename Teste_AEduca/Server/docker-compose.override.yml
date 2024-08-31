@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "Fern@nd01331"
+    ports:
+      - "5432:5432"
+
+  presentation:
+    container_name: presentation
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DockerConnection=Host=postgres;Port=5432;Database=Registration;Username=postgres;Password=Fern@nd01331
+    depends_on:
+      - postgres
+    ports:
+      - "8001:80"
